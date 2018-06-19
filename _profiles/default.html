@@ -47,13 +47,40 @@ parameters:
 #
 # https://github.com/speedtracker/speedtracker-api/blob/master/lib/SpeedTracker.js#L18-L37
 #
-#budgets:
-#  -
-#    metric: TTFB
-#    max: 600
-#    alerts: ["emailAlert", "slackAlert"]
-#  -
-#    metric: firstPaint
-#    max: 2000
-#    alerts: ["slackAlert"]
+budgets:
+# Metric: Time To First Byte/Back-end 
+# Best we have seen is 0.16s without fastly
+   -
+     metric: TTFB
+     max: 500
+     alerts: ["slackAlert"]
+
+# Metric: Start rendering / First Paint
+# Best we have seen is 0.84s with fastly.
+   -
+     metric: firstPaint
+     max: 1000
+     alerts: ["slackAlert"]
+
+# Metric: Page fully loaded
+# Ideally this has to be 3000
+# But with fastly, best we have seen is 3.78ms
+   -
+     metric: fullyLoaded
+     max: 4000
+     alerts: ["slackAlert"]
+
+# Metric: Speed Index
+# Best we have seen is 1.32s with fastly
+   -
+     metric: SpeedIndex
+     max: 1500
+     alerts: ["slackAlert"]
+
+# Metric: Load time
+# Best we have seen is 3.39s with fastly
+   -
+     metric: loadTime
+     max: 3500
+     alerts: ["slackAlert"]
 ---
